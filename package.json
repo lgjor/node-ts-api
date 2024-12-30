@@ -5,16 +5,19 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint src/**/*.ts test/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts test/**/*.ts --fix",
     "start": "yarn build && node dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "node",
     "nodejs",
     "typescript",
     "api"
   ],
   "author": "Lucas Godoy",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/module-alias": "^2.0.4",
     "@types/node": "^22.10.2",
