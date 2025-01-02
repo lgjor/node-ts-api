@@ -1,1 +1,1 @@
-console.log('Olá, mundo. Isso é um teste.')
+console.log('Olá, mundo. Isso é um teste.');
