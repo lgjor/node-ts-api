@@ -1,4 +1,5 @@
 import axios, { AxiosStatic } from 'axios';
+import config, { IConfig } from 'config';
 
 export interface StormGlassPointSource {
   [key: string]: number;
@@ -18,6 +19,8 @@ export interface StormGlassPoint {
 export interface StormGlassForecastResponse {
   hours: StormGlassPoint[];
 }
+
+const StormGlassResourceConfig: IConfig = config.get('App.resources.StormGlass');
 
 export interface ForecastPoint {
   time: string;
@@ -39,10 +42,12 @@ export class StormGlass {
 
   public async fetchPoints(lat: number, lng: number): Promise<ForecastPoint[]> {
     const response = await this.request.get<StormGlassForecastResponse>(
-      `https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}`,
+      `${StormGlassResourceConfig.get(
+        'ApiUrl'
+      )}/weather/point?lat=${lat}&lng=${lng}&params=${this.stormGlassAPIParams}&source=${this.stormGlassAPISource}`,
       {
         headers: {
-          Authorization: 'fake-token',
+          Authorization: StormGlassResourceConfig.get('ApiToken'),
         },
       }
     );
